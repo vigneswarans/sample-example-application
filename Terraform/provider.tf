@@ -1,17 +1,14 @@
 terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      Version = ""
-    }
-  }
-
-  required_version = ">=0.14.9"
-  
-backend "s3" {
-       bucket = "sample-application-terraform"
-       key    = "sample/terraform.tfstate"
-       region = "ap-south-1"
-      dynamodb_table = "sample-application-terraform"
+ required_providers {
+   aws = {
+     source = "hashicorp/aws"
    }
+ }
+ 
+ backend "s3" {
+   bucket = "sample-application-terraform"
+   region = "ap-south-1"
+   key    = "sample/terraform.tfstate"
+   dynamodb_table = "sample-application-terraform"
+ }
 }
