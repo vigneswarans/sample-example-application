@@ -75,6 +75,16 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
+resource "local_file" "cloud_pem__private" { 
+  filename = "${path.module}/${var.name}-${var.environment}-privatekey.pem"
+  content = tls_private_key.example.private_key_pem
+}
+
+resource "local_file" "cloud_pem_public" { 
+  filename = "${path.module}/${var.name}-${var.environment}-publickey.pem"
+  content = tls_private_key.example.public_key_openssh
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "${var.name}-${var.environment}-key"
   public_key = tls_private_key.example.public_key_openssh
