@@ -1,21 +1,17 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
+      Version = "~>3.27"
     }
   }
 
-  backend "s3" {
-    # Replace this with your bucket name!
-    bucket         = "sample-application-terraform"
-    key            = "sample/terraform.tfstate"
-    region         = "ap-south-1"
-
-    # Replace this with your DynamoDB table name!
-    dynamodb_table = "sample-application-terraform"
-  }
-}
-
-provider "aws" {
-  region  = "ap-south-1"
+  required_version = ">=0.14.9"
+  
+backend "s3" {
+       bucket = "sample-application-terraform"
+       key    = "sample/terraform.tfstate"
+       region = "ap-south-1"
+      dynamodb_table = "sample-application-terraform"
+   }
 }
