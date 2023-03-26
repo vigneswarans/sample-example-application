@@ -80,16 +80,6 @@ resource "aws_key_pair" "deployer" {
   public_key = tls_private_key.example.public_key_openssh
 }
 
-resource "local_file" "cloud_pem__private" { 
-  filename = "${path.module}/${var.name}-${var.environment}-privatekey.pem"
-  content = tls_private_key.example.private_key_pem
-}
-
-resource "local_file" "cloud_pem_public" { 
-  filename = "${path.module}/${var.name}-${var.environment}-publickey.pem"
-  content = tls_private_key.example.public_key_openssh
-}
-
 resource "aws_secretsmanager_secret" "secretmasterECS" {
   name = "${var.environment}/${var.name}/ECS"
 }
